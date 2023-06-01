@@ -44,7 +44,6 @@ header h1 {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 100px;
   margin-bottom: 100px;
-  overflow: scroll;
 }
 
 .movie-list-item {
@@ -73,6 +72,11 @@ header h1 {
 
 .btn {
   height: 40px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
 }
 
 /* footer */
