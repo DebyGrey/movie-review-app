@@ -67,6 +67,10 @@ header h1 {
   color: red;
 }
 
+.likes-counter-container {
+  align-self: end;
+}
+
 .btn {
   height: 40px;
 }
