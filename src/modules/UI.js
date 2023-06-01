@@ -11,63 +11,58 @@ export default class UI {
     if (movieList.length === 0) {
       movieListContainer.innerHTML = 'No movies available at this time!';
 
-    movieListContainer.innerHTML = '';
-    if (UI.movieList.length === 0) {
-      movieListContainer.innerHTML = 'No score to display yet';
+      movieListContainer.innerHTML = '';
+      if (UI.movieList.length === 0) {
+        movieListContainer.innerHTML = 'No score to display yet';
+      } else {
+        UI.movieList.forEach((movie) => {
+          const movieListItem = document.createElement('li');
+          movieListItem.classList.add('movie-list-item');
+          movieListItem.innerHTML = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div><p class="likes-counter-container"><span class="likes-counter"></span> likes</p><button class="btn" id="comments-btn" type="buttton">Comments</button><button class="btn" id="reservation-btn" type="button">Reservations</button>`;
+          movieListContainer.appendChild(movieListItem);
 
-    } else {
-      UI.movieList.forEach((movie) => {
-        const movieListItem = document.createElement('li');
-        movieListItem.classList.add('movie-list-item');
-        movieListItem.innerHTML = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div><p class="likes-counter-container"><span class="likes-counter"></span> likes</p><button class="btn" id="comments-btn" type="buttton">Comments</button><button class="btn" id="reservation-btn" type="button">Reservations</button>`;
-        movieListContainer.appendChild(movieListItem);
-
-        // Update likes counter
-        const likesCounter = movieListItem.querySelector('.likes-counter');
-        const movieLikes = likesCount.find((item) => item.item_id === movie.id);
-        if (movieLikes) {
-          likesCounter.textContent = movieLikes.likes;
-        } else {
-          likesCounter.textContent = '0';
-        }
-        const movieListItemContent = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div>
+          // Update likes counter
+          const likesCounter = movieListItem.querySelector('.likes-counter');
+          const movieLikes = likesCount.find((item) => item.item_id === movie.id);
+          if (movieLikes) {
+            likesCounter.textContent = movieLikes.likes;
+          } else {
+            likesCounter.textContent = '0';
+          }
+          const movieListItemContent = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div>
         <button class="btn commentsbtn"  type="buttton" id="${movie.id}">Comments</button>
         <button class="btn" id="reservation-btn" type="button">Reservations</button>`;
-        movieListItem.innerHTML = movieListItemContent;
-        movieListContainer.appendChild(movieListItem);
-        const commentBtn = movieListItem.querySelector('.commentsbtn');  
-        commentBtn.addEventListener('click', UI.popWindow);
-       
-      });
-      
+          movieListItem.innerHTML = movieListItemContent;
+          movieListContainer.appendChild(movieListItem);
+          const commentBtn = movieListItem.querySelector('.commentsbtn');
+          commentBtn.addEventListener('click', UI.popWindow);
+        });
+      }
     }
-  };
+  }
 
+  static popWindow = (event) => {
+    event.preventDefault();
+    const movieId = event.target.id;
+    const movieChoice = UI.movieList.find((item) => item.id === parseInt(movieId, 10));
 
-  static popWindow = (event) => { 
-
-      event.preventDefault();  
-      const movieId = event.target.id;   
-     const movieChoice = UI.movieList.find((item) => item.id === parseInt(movieId,10));
-
-    if(typeof movieChoice === "object") {   
-      
-      if (document.contains(document.getElementById("box"))) {
-        document.getElementById("box").remove();
+    if (typeof movieChoice === 'object') {
+      if (document.contains(document.getElementById('box'))) {
+        document.getElementById('box').remove();
       }
 
-      const mainContainer = document.createElement("div");
+      const mainContainer = document.createElement('div');
       mainContainer.id = 'box';
-    
+
       const closeDiv = document.createElement('div');
-      closeDiv.className = 'closeBtn';      
-      const close = document.createElement("button");
-      close.innerText = "Close";
+      closeDiv.className = 'closeBtn';
+      const close = document.createElement('button');
+      close.innerText = 'Close';
       close.id = 'closeBtn';
-      closeDiv.appendChild(close); 
+      closeDiv.appendChild(close);
       mainContainer.appendChild(closeDiv);
 
-      const movieDiv = document.createElement('div');    
+      const movieDiv = document.createElement('div');
       const movieImg = document.createElement('img');
       movieImg.src = movieChoice.image.medium;
       movieImg.alt = movieChoice.name;
@@ -79,12 +74,12 @@ export default class UI {
       const title = document.createElement('h3');
       title.innerText = movieChoice.name;
       title.className = 'text-3xl font-semibold text-center text-black';
-      popupTitle.className = 'px-4 py-2 border-b';      
+      popupTitle.className = 'px-4 py-2 border-b';
       popupTitle.appendChild(title);
       mainContainer.appendChild(popupTitle);
 
       const movieObjDiv = document.createElement('div');
-    //  container.appendChild(movieObjDiv);
+      //  container.appendChild(movieObjDiv);
       movieObjDiv.className = 'grid grid-cols-2 text-center';
 
       const genre = document.createElement('span');
@@ -101,13 +96,12 @@ export default class UI {
       movieObjDiv.appendChild(premiered);
       mainContainer.appendChild(movieObjDiv);
 
-      const description = document.createElement('p');   
+      const description = document.createElement('p');
       description.innerHTML = movieChoice.summary;
       mainContainer.appendChild(description);
 
-    
       const commentContainer = document.createElement('div');
-      commentContainer.id=`commentContainer${movieChoice.id}`;
+      commentContainer.id = `commentContainer${movieChoice.id}`;
       mainContainer.appendChild(commentContainer);
 
       const commentForm = document.createElement('form');
@@ -133,34 +127,28 @@ export default class UI {
       document.body.appendChild(mainContainer);
 
       const closeBtn = document.getElementById('closeBtn');
-  
-  
-    closeBtn.addEventListener('click', () => {
-    //  mainContainer.classList.add('hidden');
-    //  mainContainer.classList.remove('popup-open');
-    //  body.classList.remove('popup-open');
-     // document.head.removeChild(style);
-       mainContainer.remove();
-   
-    });
 
-    Comment.displayComments(movieChoice.id);
-    UI.addComment(movieChoice.id);
+      closeBtn.addEventListener('click', () => {
+        //  mainContainer.classList.add('hidden');
+        //  mainContainer.classList.remove('popup-open');
+        //  body.classList.remove('popup-open');
+        // document.head.removeChild(style);
+        mainContainer.remove();
+      });
 
-   }
-
-  
+      Comment.displayComments(movieChoice.id);
+      UI.addComment(movieChoice.id);
+    }
   }
 
-  static addComment =  (itemId) => {
-  
+  static addComment = (itemId) => {
     const commentForm = document.getElementById(`commentForm${itemId}`);
     commentForm.addEventListener('submit', (event) => {
-      event.preventDefault(); 
- 
+      event.preventDefault();
+
       if (commentForm.inputName.value.length !== 0 && commentForm.inputComment.value.length) {
-          Comment.postComment(itemId, commentForm.inputName.value, commentForm.inputComment.value)
-          .then(() => {         
+        Comment.postComment(itemId, commentForm.inputName.value, commentForm.inputComment.value)
+          .then(() => {
             Comment.displayComments(itemId);
           })
           .catch((error) => {
@@ -169,7 +157,5 @@ export default class UI {
         commentForm.reset();
       }
     });
-   }
-
-
+  }
 }

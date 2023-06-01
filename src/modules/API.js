@@ -1,11 +1,14 @@
 export default class API {
   static baseMoviesURL = 'https://api.tvmaze.com';
+
   static showMoviesEndPoint= '/shows';
+
   static baseMoviesURL = API.baseMoviesURL + API.showMoviesEndPoint;
 
   static showMoviesURL = '/shows';
 
   static baseMoviesURL = API.baseMoviesURL + API.showMoviesEndPoint;
+
   static baseInvolvementURL =
     'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/KBe5C9DIOBKtmbfBe81E/';
 

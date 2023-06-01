@@ -1,11 +1,11 @@
 import API from './API.js';
-class Comment extends API {
 
+class Comment extends API {
   static postComment(itemId, username, comment) {
-    let url = `${API.baseInvolvementURL}comments`;
+    const url = `${API.baseInvolvementURL}comments`;
 
     const body = { item_id: itemId, username, comment };
-  
+
     return new Promise((resolve, reject) => {
       fetch(url, {
         method: 'POST',
@@ -13,9 +13,7 @@ class Comment extends API {
         body: JSON.stringify(body),
       })
         .then((response) => {
-          if (response.ok) {
-           
-          } else {
+          if (response.ok === false) {
             throw new Error(`Failed to create comment: ${response.status}`);
           }
         })
@@ -26,7 +24,7 @@ class Comment extends API {
   }
 
   static getComments(itemId) {
-    let url = `${API.baseInvolvementURL}comments?item_id=${itemId}`;
+    const url = `${API.baseInvolvementURL}comments?item_id=${itemId}`;
 
     return new Promise((resolve, reject) => {
       fetch(url)
@@ -37,7 +35,6 @@ class Comment extends API {
           throw new Error(`Failed to get comments: ${response.status}`);
         })
         .then((data) => {
-         
           resolve(data);
         })
         .catch(() => {
@@ -46,8 +43,8 @@ class Comment extends API {
     });
   }
 
-  static  displayComments(itemId) {
-    let container = document.getElementById(`commentContainer${itemId}`);
+  static displayComments(itemId) {
+    const container = document.getElementById(`commentContainer${itemId}`);
 
     Comment.getComments(itemId)
       .then((comments) => {
@@ -55,7 +52,7 @@ class Comment extends API {
           const list = document.createElement('ul');
           const commentCounter = document.createElement('h2');
           commentCounter.className = '';
-          commentCounter.innerHTML = `<h4>Comments</h4b> <b>(</b>${comments.length}<b>)</b>`;
+          commentCounter.innerHTML = `<h5>Comments</h5> <b>(</b>${comments.length}<b>)</b>`;
           list.appendChild(commentCounter);
           comments.forEach((comment) => {
             const commentLists = document.createElement('li');
@@ -74,4 +71,4 @@ class Comment extends API {
   }
 }
 
-export default Comment ;
+export default Comment;
