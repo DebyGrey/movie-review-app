@@ -1,5 +1,4 @@
 import API from './API.js';
-
 // Display movies
 export default class UI {
   static displayMovies = async () => {
