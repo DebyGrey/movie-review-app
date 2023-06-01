@@ -14,7 +14,7 @@
   \**********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://movie-review-app/./src/index.js?");
+eval("// import './images/logo.png';\n\n\n//# sourceURL=webpack://movie-review-app/./src/index.js?");
 
 /***/ })
 

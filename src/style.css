@@ -8,6 +8,28 @@
   font-family: sans-serif;
 }
 
+/* header */
+header {
+  padding: 5% 5%;
+  height: 50px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 32px;
+}
+
+/* logo */
+.logo {
+  height: 48px;
+}
+
+.counter {
+  font-size: 20px;
+}
+
 body {
   min-height: 100vh;
   display: flex;
