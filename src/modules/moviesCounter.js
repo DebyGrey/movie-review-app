@@ -1,9 +1,3 @@
-import API from './API.js';
+const movieCounter = (arr) => arr.length;
 
-const movieCounter = async () => {
-  const movieData = await API.getData();
-  const movieCounter = movieData.length;
-  return (movieCounter);
-};
-
-export default { movieCounter };
+export default movieCounter;
