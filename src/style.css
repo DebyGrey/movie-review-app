@@ -31,6 +31,12 @@ header h1 {
   font-size: 32px;
 }
 
+.total-movies {
+  position: relative;
+  left: -10px;
+  top: 5px;
+}
+
 /* logo */
 .logo {
   height: 48px;
@@ -84,6 +90,11 @@ h5 {
 
 .btn {
   height: 40px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
 }
 
 /* footer */
