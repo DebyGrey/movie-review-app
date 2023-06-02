@@ -30,7 +30,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 LEADERBOARD WEB APP <a name="about-project"></a>
+# 📖 MOVIE WEB APP <a name="about-project"></a>
 
 **Movie review web app** is a web app which dynamically displays TV Shows and films from a public  API  and stores and retrieves reviews in the Involvement API.
 
