@@ -28,6 +28,12 @@ header h1 {
   font-size: 32px;
 }
 
+.total-movies {
+  position: relative;
+  left: -10px;
+  top: 5px;
+}
+
 /* logo */
 .logo {
   height: 48px;
