@@ -65,6 +65,7 @@ export default class UI {
       movieImg.src = movieChoice.image.medium;
       movieImg.alt = movieChoice.name;
       movieImg.id = 'movieImg';
+      movieImg.classList.add('comment-img-holder');
       movieDiv.appendChild(movieImg);
       mainContainer.appendChild(movieDiv);
 
@@ -81,16 +82,16 @@ export default class UI {
       movieObjDiv.className = 'grid grid-cols-2 text-center';
 
       const genre = document.createElement('span');
-      genre.innerHTML = `<h4>Genre: </h4>${movieChoice.genres}`;
+      genre.innerHTML = `<h4 class="color-white">Genre: ${movieChoice.genres}</h4>`;
       movieObjDiv.appendChild(genre);
       const rating = document.createElement('span');
-      rating.innerHTML = `<h4>Rating: </h4>${movieChoice.rating.average}`;
+      rating.innerHTML = `<h4 class="color-white">Rating: ${movieChoice.rating.average}</h4>`;
       movieObjDiv.appendChild(rating);
       const language = document.createElement('span');
-      language.innerHTML = `<h4>Language: </h4>${movieChoice.language}`;
+      language.innerHTML = `<h4 class="color-white">Language: ${movieChoice.language}</h4>`;
       movieObjDiv.appendChild(language);
       const premiered = document.createElement('span');
-      premiered.innerHTML = `<h4>Language: </h4>${movieChoice.premiered}`;
+      premiered.innerHTML = `<h4 class= "color-white">Language:${movieChoice.premiered}</h4>`;
       movieObjDiv.appendChild(premiered);
       mainContainer.appendChild(movieObjDiv);
 

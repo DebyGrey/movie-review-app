@@ -52,6 +52,7 @@ class Comment extends API {
       .then((comments) => {
         if (comments.length > 0) {
           const list = document.createElement('ul');
+          list.className = 'comment-container';
           const commentCounter = document.createElement('h2');
 
           commentCounter.innerHTML = `<h5>Comments</h5> <b>(</b>${comments.length}<b>)</b>`;
