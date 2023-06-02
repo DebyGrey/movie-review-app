@@ -31,13 +31,11 @@
 
 # 📖 LEADERBOARD WEB APP <a name="about-project"></a>
 
-**Movie review web app** is a web app which dynamically displays all scores according entered, from highest score to the lowest.
+**Movie review web app** is a web app which dynamically displays TV Shows and films from a public  API  and stores and retrieves reviews in the Involvement API.
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
-
-
 <details>
   <summary>HTML5, CSS3 & Javascript</summary>
 </details>
