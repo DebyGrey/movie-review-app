@@ -1,10 +1,14 @@
 import API from './API.js';
 
 class Comment extends API {
-  static postComment(itemId, username, comment) {
-    const url = `${API.appBaseURL}comments`;
+  static postComment(formData) {
+    const url = `${API.commentsURL}`;
 
-    const body = { item_id: itemId, username, comment };
+    const body = {
+      item_id: formData.itemId,
+      username: formData.username,
+      comment: formData.comment,
+    };
 
     return new Promise((resolve, reject) => {
       fetch(url, {
@@ -47,6 +51,7 @@ class Comment extends API {
 
   static displayComments(itemId) {
     const container = document.getElementById(`commentContainer${itemId}`);
+    container.innerHTML = '';
     Comment.getComments(itemId)
       .then((comments) => {
         if (comments.length > 0) {

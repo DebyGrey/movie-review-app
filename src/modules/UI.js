@@ -6,8 +6,8 @@ import Comment from './comment.js';
 // Display movies
 export default class UI {
   static displayMovies = async () => {
-    await UI.updateLikesCount();
     const movieList = await API.getData();
+    UI.updateLikesCount();
     const movieCount = movieCounter(movieList);
     const totalMovies = document.querySelector('.total-movies');
     totalMovies.textContent = movieCount;
@@ -19,7 +19,7 @@ export default class UI {
       movieList.forEach((movie) => {
         const movieListItem = document.createElement('li');
         movieListItem.classList.add('movie-list-item');
-        const movieListItemContent = `<img src="${movie.image.medium}"/> <div class="movie-title-header"><h4>${movie.name}</h4> <button type="button" class="like-btn"><i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></button></div><p class="likes-counter-container"><span id="${movie.id}" class="likes-counter"></span> likes</p><button class="comment-btn" id="${movie.id}" type="buttton">Comments</button><button class="reservation-btn" id="${movie.id}" type="button">Reservations</button>`;
+        const movieListItemContent = `<img src="${movie.image.medium}"/> <div class="movie-title-header"><h4>${movie.name}</h4> <button type="button" class="like-btn"><i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></button></div><p class="likes-counter-container color-black"><span id="${movie.id}" class="likes-counter"></span> likes</p><button class="comment-btn" id="${movie.id}" type="buttton">Comments</button><button class="reservation-btn" id="${movie.id}" type="button">Reservations</button>`;
         movieListItem.innerHTML = movieListItemContent;
         movieListContainer.appendChild(movieListItem);
       });
@@ -55,7 +55,6 @@ export default class UI {
     likesCountElements.forEach((element) => {
       const movieId = element.id;
       const movieLikes = likesData.find((item) => item.item_id === movieId);
-
       if (movieLikes) {
         element.textContent = movieLikes.likes;
       } else {
@@ -107,7 +106,6 @@ export default class UI {
       mainContainer.appendChild(popupTitle);
 
       const movieObjDiv = document.createElement('div');
-      //  container.appendChild(movieObjDiv);
       movieObjDiv.className = 'grid grid-cols-2 text-center';
 
       const genre = document.createElement('span');
@@ -133,15 +131,15 @@ export default class UI {
       mainContainer.appendChild(commentContainer);
 
       const commentForm = document.createElement('form');
-      commentForm.className = '';
+      commentForm.className = 'comment-form';
       commentForm.id = `commentForm${movieChoice.id}`;
       const inputName = document.createElement('input');
       inputName.id = 'inputName';
-      inputName.className = 'input';
+      inputName.className = 'input input-username';
       inputName.placeholder = 'Your name';
       const inputComment = document.createElement('textarea');
       inputComment.id = 'inputComment';
-      inputComment.className = 'textarea';
+      inputComment.className = 'textarea input-comment';
       inputComment.placeholder = 'Your insights...';
       const addButton = document.createElement('button');
       addButton.type = 'submit';
@@ -157,12 +155,23 @@ export default class UI {
       const closeBtn = document.getElementById('closeBtn');
 
       closeBtn.addEventListener('click', () => {
-        //  mainContainer.classList.add('hidden');
-        //  mainContainer.classList.remove('popup-open');
-        //  body.classList.remove('popup-open');
-        // document.head.removeChild(style);
         mainContainer.remove();
       });
+      addButton.addEventListener('click', (e) => UI.submitComment(e));
     }
+  };
+
+  static submitComment = async (e) => {
+    e.preventDefault();
+    const itemId = e.target.id;
+    const username = document.querySelector('.input-username').value;
+    const comment = document.querySelector('.input-comment').value;
+    if (username !== '' || comment !== '') {
+      const formData = { itemId, username, comment };
+      await Comment.postComment(formData);
+    }
+    Comment.displayComments(itemId);
+    document.querySelector('.input-username').value = '';
+    document.querySelector('.input-comment').value = '';
   };
 }
