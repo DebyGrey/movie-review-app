@@ -12,6 +12,8 @@ export default class API {
 
   static likesURL = `${API.appBaseURL}apps/${API.appID}/likes`;
 
+  static commentsURL = `${API.appBaseURL}apps/${API.appID}/comments`;
+
   static getData = async () => {
     const res = await fetch(API.url);
     const result = await res.json();
