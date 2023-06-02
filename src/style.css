@@ -1,0 +1,239 @@
+/* General CSS with mobile first approach */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.color-white {
+  color: #fff;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+/* header */
+header {
+  padding: 3% 3%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+header h1 {
+  font-size: 32px;
+}
+
+.total-movies {
+  font-size: 16px;
+  position: relative;
+  left: -5px;
+  top: 5px;
+}
+
+/* logo */
+.logo {
+  height: 48px;
+}
+
+.counter {
+  font-size: 20px;
+}
+
+/* movie display style */
+.movie-section {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-list-container {
+  width: 80%;
+  padding: 2% 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  row-gap: 100px;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+.movie-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.movie-title-header h4 {
+  font-size: 16px;
+}
+
+h5 {
+  color: #ffa000;
+  font-size: 0.9em;
+}
+
+.movie-title-header {
+  padding: 2% 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.liked {
+  color: red;
+}
+
+.likes-counter-container {
+  align-self: end;
+}
+
+.comment-btn,
+.reservation-btn {
+  height: 40px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+}
+
+/* footer */
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  border-top: 2px solid grey;
+}
+
+.popup {
+  background-color: aqua;
+  width: 420px;
+  padding: 30px 40px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 0%;
+  top: 0%;
+  border-radius: 8px;
+  display: none;
+  font-family: “Poppins”, sans-serif;
+  text-align: center;
+}
+
+.close {
+  background-color: turquoise;
+  color: white;
+  font-size: 24px;
+  padding: 8px 12px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  top: 0;
+  z-index: 1;
+}
+
+#box {
+  width: 70%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  position: fixed;
+  top: 1%;
+  left: 15%;
+  padding: 1% 2% 2% 3%;
+  gap: 15px;
+}
+
+.comment-btn,
+.reservation-btn,
+#closeBtn {
+  padding: 5px 8px;
+  outline: none;
+  background: hsl(9, 99%, 49%);
+  border: 1px solid rgb(201, 30, 0);
+  border-radius: 5px;
+  font-size: 1.2em;
+  color: rgb(233, 229, 229);
+}
+
+.comment-btn:hover,
+.reservation-btn:hover,
+#closeBtn,
+.submit-comment {
+  background-color: rgb(201, 30, 0);
+  cursor: pointer;
+}
+
+h3 {
+  color: #ffa000;
+  font-size: 2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+p {
+  text-align: center;
+  color: #fff;
+}
+
+.input {
+  font-size: 1em;
+  font-family: inherit;
+  height: 50%;
+  padding: 8px;
+  width: 100%;
+}
+
+.textarea {
+  font-size: 1em;
+  font-family: inherit;
+  padding: 8px;
+  height: 50%;
+  width: 100%;
+}
+
+.closeBtn {
+  align-self: end;
+}
+
+.comment-img-holder {
+  height: 200px;
+  object-fit: cover;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #fff;
+  height: 120px;
+  overflow: scroll;
+}
+
+.comment-container li {
+  list-style-type: none;
+}
+
+#commentForm2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.color-black {
+  color: #000;
+}
