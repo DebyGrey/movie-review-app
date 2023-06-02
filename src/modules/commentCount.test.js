@@ -4,7 +4,7 @@
 
 import Comment from './comment.js';
 
-describe('Comment', () => {  
+describe('Comment', () => {
   const itemId = '123';
 
   it('should return the correct number of comments for an item', async () => {
@@ -19,12 +19,13 @@ describe('Comment', () => {
     container.id = `commentContainer${itemId}`;
     document.body.appendChild(container);
 
-    await comment.displayComments(itemId);
+
+    await Comment.displayComments(itemId);
 
     expect(container.innerHTML).toContain(`<b>Comments</b> <b>(</b>${comments.length}<b>)</b>`);
-    expect(container.innerHTML).toContain(`${comments[0].username}: ${comments[0].comment}`);
-    expect(container.innerHTML).toContain(`${comments[1].username}: ${comments[1].comment}`);
+    expect(container.innerHTML).toContain(`${comments[0].name}: ${comments[0].comment}`);
+    expect(container.innerHTML).toContain(`${comments[1].name}: ${comments[1].comment}`);
 
-    expect(comment.getComments).toHaveBeenCalledWith(itemId);
+    expect(Comment.getComments).toHaveBeenCalledWith(itemId);
   });
 });
