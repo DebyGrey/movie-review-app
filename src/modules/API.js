@@ -1,26 +1,33 @@
 export default class API {
-  static baseMoviesURL = 'https://api.tvmaze.com';
+  static appID = 'KBe5C9DIOBKtmbfBe81E';
 
-  static showMoviesEndPoint= '/shows';
+  static baseURL = 'https://api.tvmaze.com';
 
-  static baseMoviesURL = API.baseMoviesURL + API.showMoviesEndPoint;
+  static showMoviesURL = '/shows';
 
-   static baseInvolvementURL =
-    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/KBe5C9DIOBKtmbfBe81E/';
+  static url = API.baseURL + API.showMoviesURL;
 
-    static likesURL = `${API.baseInvolvementURL}likes`;
+  static appBaseURL =
+    'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
 
-  // Get data
+  static likesURL = `${API.appBaseURL}apps/${API.appID}/likes`;
+
+  static commentsURL = `${API.appBaseURL}apps/${API.appID}/comments`;
+
   static getData = async () => {
-    const res = await fetch(API.baseMoviesURL);
+    const res = await fetch(API.url);
     const result = await res.json();
     return result;
   };
 
-  // Get Like Data
-  static getLikesCount = async () => {
-    const res = await fetch(API.likesURL);
-    const result = await res.json();
-    return result;
+  static postLikes = async (id) => {
+    const likedMovieID = { item_id: `${id}` };
+    await fetch(API.likesURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(likedMovieID),
+    });
   };
 }

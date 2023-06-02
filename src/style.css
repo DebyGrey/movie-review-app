@@ -7,9 +7,11 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
 .color-white {
   color: #fff;
 }
+
 body {
   min-height: 100vh;
   display: flex;
@@ -30,6 +32,12 @@ header h1 {
   font-size: 32px;
 }
 
+.total-movies {
+  position: relative;
+  left: -10px;
+  top: 5px;
+}
+
 /* logo */
 .logo {
   height: 48px;
@@ -44,6 +52,7 @@ header h1 {
   display: flex;
   justify-content: center;
 }
+
 .movie-list-container {
   width: 80%;
   padding: 2% 2%;
@@ -84,8 +93,14 @@ h5 {
   align-self: end;
 }
 
-.btn {
+.comment-btn,
+.reservation-btn {
   height: 40px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
 }
 
 /* footer */
@@ -125,20 +140,22 @@ footer {
 }
 
 #box {
-  width: 50%;
+  width: 70%;
   background: black;
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: center;
   position: fixed;
-  top: 10%;
-  left: 25%;
-  padding: 3% 2%;
-  gap: 20px;
+  top: 1%;
+  left: 15%;
+  padding: 1% 2% 2% 3%;
+  gap: 15px;
 }
 
-button {
+.comment-btn,
+.reservation-btn,
+#closeBtn {
   padding: 5px 8px;
   outline: none;
   background: hsl(9, 99%, 49%);
@@ -148,7 +165,10 @@ button {
   color: rgb(233, 229, 229);
 }
 
-button:hover {
+.comment-btn:hover,
+.reservation-btn:hover,
+#closeBtn,
+.submit-comment {
   background-color: rgb(201, 30, 0);
   cursor: pointer;
 }
@@ -186,23 +206,27 @@ p {
 }
 
 .closeBtn {
- align-self: end;
+  align-self: end;
 }
+
 .comment-img-holder {
   height: 200px;
   object-fit: cover;
 }
+
 .comment-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   color: #fff;
-  height: 150px;
+  height: 120px;
   overflow: scroll;
 }
+
 .comment-container li {
- list-style-type: none;
+  list-style-type: none;
 }
+
 #commentForm2 {
   display: flex;
   flex-direction: column;

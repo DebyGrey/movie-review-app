@@ -2,7 +2,7 @@ import API from './API.js';
 
 class Comment extends API {
   static postComment(itemId, username, comment) {
-    const url = `${API.baseInvolvementURL}comments`;
+    const url = `${API.appBaseURL}comments`;
 
     const body = { item_id: itemId, username, comment };
 
@@ -26,7 +26,7 @@ class Comment extends API {
   }
 
   static getComments(itemId) {
-    const url = `${API.baseInvolvementURL}comments?item_id=${itemId}`;
+    const url = `${API.commentsURL}?item_id=${itemId}`;
 
     return new Promise((resolve, reject) => {
       fetch(url)
@@ -47,7 +47,6 @@ class Comment extends API {
 
   static displayComments(itemId) {
     const container = document.getElementById(`commentContainer${itemId}`);
-
     Comment.getComments(itemId)
       .then((comments) => {
         if (comments.length > 0) {
@@ -62,13 +61,14 @@ class Comment extends API {
             commentLists.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment} `;
             list.appendChild(commentLists);
           });
-          container.innerHTML = '';
+          // container.innerHTML = '';
           container.appendChild(list);
         } else {
           container.innerHTML = 'Sorry,there are no comments to display';
         }
       })
       .catch(() => {
+        const container = document.getElementById(`commentContainer${itemId}`);
         container.innerHTML = '<b>Sorry,there are no comments to display</b>';
       });
   }
