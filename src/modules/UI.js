@@ -1,13 +1,18 @@
 import API from './API.js';
+import likesCounter from './likesCounter.js';
+import moviesCounter from './moviesCounter.js';
 
 // Display movies
 export default class UI {
   static displayMovies = async () => {
+    const movieCounter = await moviesCounter.movieCounter();
     const movieList = await API.getData();
-    const likesCount = await API.getLikesCount();
+    const likesCount = await likesCounter.getLikesCount();
+    const totalMovies = document.querySelector('.total-movies');
+    totalMovies.textContent = movieCounter;
     const movieListContainer = document.querySelector('.movie-list-container');
     movieListContainer.innerHTML = '';
-    if (movieList.length === 0) {
+    if (movieCounter === 0) {
       movieListContainer.innerHTML = 'No movies available at this time!';
     } else {
       movieList.forEach((movie) => {
@@ -19,7 +24,9 @@ export default class UI {
 
         // Update likes counter
         const likesCounter = movieListItem.querySelector('.likes-counter');
-        const movieLikes = likesCount.find((item) => item.item_id === JSON.stringify(movie.id));
+        const movieLikes = likesCount.find(
+          (item) => item.item_id === JSON.stringify(movie.id),
+        );
 
         if (movieLikes) {
           likesCounter.textContent = movieLikes.likes;
@@ -40,5 +47,5 @@ export default class UI {
     const likeID = e.target.id;
     await API.postLikes(likeID);
     UI.displayMovies();
-  }
+  };
 }
