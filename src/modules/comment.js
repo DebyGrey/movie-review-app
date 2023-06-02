@@ -54,7 +54,7 @@ class Comment extends API {
           list.className = 'comment-container';
           const commentCounter = document.createElement('h2');
 
-          commentCounter.innerHTML = `<h5>Comments</h5> <b>(</b>${comments.length}<b>)</b>`;
+          commentCounter.innerHTML = `<b><h5>Comments</h5> (${comments.length})</b>`;
           list.appendChild(commentCounter);
           comments.forEach((comment) => {
             const commentLists = document.createElement('li');
