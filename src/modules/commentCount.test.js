@@ -19,7 +19,6 @@ describe('Comment', () => {
     container.id = `commentContainer${itemId}`;
     document.body.appendChild(container);
 
-
     await Comment.displayComments(itemId);
 
     expect(container.innerHTML).toContain(`<b><h5>Comments</h5> (${comments.length})</b>`);
