@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Comment from './comment.js';
 
 describe('Comment', () => {
@@ -14,6 +18,7 @@ describe('Comment', () => {
     const container = document.createElement('div');
     container.id = `commentContainer${itemId}`;
     document.body.appendChild(container);
+
 
     await Comment.displayComments(itemId);
 
