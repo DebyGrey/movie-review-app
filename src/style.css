@@ -124,7 +124,7 @@ footer {
 }
 
 #box {
-  width: 80%;
+  width: 50%;
   height: auto;
   background: black;
   display: flex;
@@ -134,7 +134,7 @@ footer {
   justify-content: center;
   position: fixed;
   top: 10%;
-  left: 20%;
+  left: 10%;
   z-index: 99999;
   padding: 10px;
 }

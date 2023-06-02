@@ -5,12 +5,10 @@ export default class API {
 
   static baseMoviesURL = API.baseMoviesURL + API.showMoviesEndPoint;
 
-  static showMoviesURL = '/shows';
-
-  static baseMoviesURL = API.baseMoviesURL + API.showMoviesEndPoint;
-
-  static baseInvolvementURL =
+   static baseInvolvementURL =
     'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/KBe5C9DIOBKtmbfBe81E/';
+
+    static likesURL = `${API.baseInvolvementURL}likes`;
 
   // Get data
   static getData = async () => {
@@ -21,7 +19,7 @@ export default class API {
 
   // Get Like Data
   static getLikesCount = async () => {
-    const res = await fetch(API.baseInvolvementURL);
+    const res = await fetch(API.likesURL);
     const result = await res.json();
     return result;
   };

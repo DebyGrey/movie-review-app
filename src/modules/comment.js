@@ -13,7 +13,9 @@ class Comment extends API {
         body: JSON.stringify(body),
       })
         .then((response) => {
-          if (response.ok === false) {
+          if (response.ok) {
+            resolve(response.status);
+          } else {
             throw new Error(`Failed to create comment: ${response.status}`);
           }
         })
@@ -51,7 +53,7 @@ class Comment extends API {
         if (comments.length > 0) {
           const list = document.createElement('ul');
           const commentCounter = document.createElement('h2');
-          commentCounter.className = '';
+
           commentCounter.innerHTML = `<h5>Comments</h5> <b>(</b>${comments.length}<b>)</b>`;
           list.appendChild(commentCounter);
           comments.forEach((comment) => {

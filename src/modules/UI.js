@@ -3,41 +3,39 @@ import Comment from './comment.js';
 // import API from './API.js';
 // Display movies
 export default class UI {
+  static movieList;
+
   static displayMovies = async () => {
-    const movieList = await Comment.getData();
+    this.movieList = await Comment.getData();
     const likesCount = await Comment.getLikesCount();
     const movieListContainer = document.querySelector('.movie-list-container');
-    movieListContainer.innerHTML = '';
-    if (movieList.length === 0) {
+
+    if (UI.movieList.length === 0) {
       movieListContainer.innerHTML = 'No movies available at this time!';
-
+    } else {
       movieListContainer.innerHTML = '';
-      if (UI.movieList.length === 0) {
-        movieListContainer.innerHTML = 'No score to display yet';
-      } else {
-        UI.movieList.forEach((movie) => {
-          const movieListItem = document.createElement('li');
-          movieListItem.classList.add('movie-list-item');
-          movieListItem.innerHTML = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div><p class="likes-counter-container"><span class="likes-counter"></span> likes</p><button class="btn" id="comments-btn" type="buttton">Comments</button><button class="btn" id="reservation-btn" type="button">Reservations</button>`;
-          movieListContainer.appendChild(movieListItem);
+      UI.movieList.forEach((movie) => {
+        const movieListItem = document.createElement('li');
+        movieListItem.classList.add('movie-list-item');
+        movieListItem.innerHTML = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i id="${movie.id}" class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div><p class="likes-counter-container"><span class="likes-counter"></span> likes</p><button class="btn" id="comments-btn" type="buttton">Comments</button><button class="btn" id="reservation-btn" type="button">Reservations</button>`;
+        movieListContainer.appendChild(movieListItem);
 
-          // Update likes counter
-          const likesCounter = movieListItem.querySelector('.likes-counter');
-          const movieLikes = likesCount.find((item) => item.item_id === movie.id);
-          if (movieLikes) {
-            likesCounter.textContent = movieLikes.likes;
-          } else {
-            likesCounter.textContent = '0';
-          }
-          const movieListItemContent = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div>
+        // Update likes counter
+        const likesCounter = movieListItem.querySelector('.likes-counter');
+        const movieLikes = likesCount.find((item) => item.item_id === movie.id);
+        if (movieLikes) {
+          likesCounter.textContent = movieLikes.likes;
+        } else {
+          likesCounter.textContent = '0';
+        }
+        const movieListItemContent = `<img src= "${movie.image.medium}" class= ""/> <div class="movie-title-header"><h4>${movie.name}</h4> <i class="fa-regular fa-heart fa-xl" aria-hidden="true"></i></div>
         <button class="btn commentsbtn"  type="buttton" id="${movie.id}">Comments</button>
         <button class="btn" id="reservation-btn" type="button">Reservations</button>`;
-          movieListItem.innerHTML = movieListItemContent;
-          movieListContainer.appendChild(movieListItem);
-          const commentBtn = movieListItem.querySelector('.commentsbtn');
-          commentBtn.addEventListener('click', UI.popWindow);
-        });
-      }
+        movieListItem.innerHTML = movieListItemContent;
+        movieListContainer.appendChild(movieListItem);
+        const commentBtn = movieListItem.querySelector('.commentsbtn');
+        commentBtn.addEventListener('click', UI.popWindow);
+      });
     }
   }
 
@@ -151,8 +149,8 @@ export default class UI {
           .then(() => {
             Comment.displayComments(itemId);
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(() => {
+            throw new Error('Failed to create comment');
           });
         commentForm.reset();
       }
